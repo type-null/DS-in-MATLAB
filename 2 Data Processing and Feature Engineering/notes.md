@@ -21,6 +21,10 @@ This will ensure the data files are always accessible every time you start MATLA
 flights = importFlightsData("flightsJan.csv")
 ```
 
+- The departure time is in the time zone for the origin airport, whereas the arrival time is in the time zone for the destination airport.
+
+![variables relationship](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/LA4Gfp92SkCOBn6fdspArg_aa226070cad5140f55bd2102b551dbdc_Flight-time-diagram.png?expiry=1589068800000&hmac=9-AH07HuRJBHHqx5lk9MRuZOqt19mvvRGx2QZC5C3JI)
+
 ## 2 Organize Data
 
 ## 3 Clean Data
