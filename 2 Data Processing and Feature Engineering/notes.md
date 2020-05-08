@@ -8,6 +8,12 @@ __Important!__ In the MATLAB Command Window type ```savepath``` This will ensure
 
 ## 1 Survey Data
 
+### Flights Dataset
+
+- 2015 data from the US Department of Transportation's Airline On-time Performance Data Set, specifically the [Bureau of Transportation Statistics](https://www.transtats.bts.gov/homepage.asp).
+
+- To import the data for January ```flights = importFlightsData("flightsJan.csv")```
+
 ## 2 Organize Data
 
 ## 3 Clean Data
