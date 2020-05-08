@@ -4,7 +4,11 @@ Before you start, download [the code files and readings](https://www.mathworks.c
 
 Open MATLAB, navigate the Current Folder. Right click on the folder and select `Add to Path` -> `Selected Folders and Subfolders`.
 
-__Important!__ In the MATLAB Command Window type ```savepath``` This will ensure the data files are always accessible every time you start MATLAB.
+__Important!__ In the MATLAB Command Window type 
+```matlab
+savepath
+```
+This will ensure the data files are always accessible every time you start MATLAB.
 
 ## 1 Survey Data
 
@@ -12,7 +16,10 @@ __Important!__ In the MATLAB Command Window type ```savepath``` This will ensure
 
 - 2015 data from the US Department of Transportation's Airline On-time Performance Data Set, specifically the [Bureau of Transportation Statistics](https://www.transtats.bts.gov/homepage.asp).
 
-- To import the data for January ```flights = importFlightsData("flightsJan.csv")```
+- To import the data for January 
+```matlab
+flights = importFlightsData("flightsJan.csv")
+```
 
 ## 2 Organize Data
 
