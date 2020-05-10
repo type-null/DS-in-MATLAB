@@ -144,10 +144,33 @@ Like 2-D histograms, but visualized using box color instead of bar height.
   ```matlab
   datetime(date,"InputFormat","yyyy-MM-dd HH:mm","Format","yyyy-MM-dd HH:mm") % specify input and display format
   ```
-  - Calculate time
+- Calculate time
+  1. fixed duration
       - `duratoin(3,20,0)` >> 03:20:00 (3 hour 20 minute)
+        - Also `seconds`, `minutes`, `hours`, `days`, or `years`
       - `time = minutes(250)` >> 250 min
       - `time.Format = hh:mm` >> 04:10
+  2. variable duration
+      - `calmonths(2)` >> 2 _calendar months_ 
+        - one month can be 28, 29, 30, or 31 days long
+        - Also `caldays`, `calweeks`, `calquarters`, and `calyears`
+
+- Sequence of Datetime or Duration using `:`
+  - Defualt step size is one calendar day
+    ```matlab
+    t1 = datetime(2013,11,1,8,0,0);
+    t2 = datetime(2013,11,5,8,0,0);
+    t = t1:t2
+    ```
+  - Specify step size
+    ```matlab
+    t = t1:caldays(2):t2
+    t = t1:hours(18):t2
+    ```
+  - Duration sequence
+    ```matlab
+    d = 0:seconds(30):minutes(3)
+    ```
 
 ```matlab
 doc dates and time
