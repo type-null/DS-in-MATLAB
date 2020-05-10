@@ -1,5 +1,13 @@
 # Data Processing and Feature Engineering
 
+__Table of Contents__
+1. [Survey Data](#ch1)
+2. [Organize Data](#ch2)
+3. [Clean Data](#ch3)
+4. [Find Features](#ch4)
+5. [Domain Specific Feature Engineering](#ch5)
+
+
 Before you start, download [the code files and readings](https://www.mathworks.com/supportfiles/practicaldsmatlab/flights/Data%20Processing%20and%20Feature%20Engineering.zip) and [data files](https://www.mathworks.com/supportfiles/practicaldsmatlab/flights/Flights.zip).
 
 Open MATLAB, navigate the Current Folder. Right click on the folder and select `Add to Path` -> `Selected Folders and Subfolders`.
@@ -10,6 +18,7 @@ savepath
 ```
 This will ensure the data files are always accessible every time you start MATLAB.
 
+<a name="ch1"></a>
 ## 1 Survey Data
 
 ### Flights Dataset
@@ -83,6 +92,7 @@ Like 2-D histograms, but visualized using box color instead of bar height.
     - Single plot with multiple-axes to show the path of observations
 
 
+<a name="ch2"></a>
 ## 2 Organize Data
 
 ### Strings
@@ -102,9 +112,17 @@ Like 2-D histograms, but visualized using box color instead of bar height.
 
   - `contains()` -> _logical_
 
+<a name="ch3"></a>
 ## 3 Clean Data
 
+
+
+<a name="ch4"></a>
 ## 4 Find Features that Matter
 
+
+
+<a name="ch5"></a>
 ## 5 Domain Specific Feature Engineering
+
 
