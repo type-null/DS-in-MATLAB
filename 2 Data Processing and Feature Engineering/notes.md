@@ -3,7 +3,7 @@
 | __Table of Contents__
 | ----------------------
 | 1. [Survey Data](#ch1)<br>- [Flights Dataset](#ch1.1)<br>- [Shape of Distribution](#ch1.2)<br>- [Visualizing Multi-Dimensional Data](#ch1.3)
-| 2. [Organize Data](#ch2)<br> - [Strings](#ch2.1)
+| 2. [Organize Data](#ch2)<br>- [Strings](#ch2.1)
 | 3. [Clean Data](#ch3)
 | 4. [Find Features](#ch4)
 | 5. [Domain Specific Feature Engineering](#ch5)
@@ -116,8 +116,28 @@ Like 2-D histograms, but visualized using box color instead of bar height.
 
   - `contains()` -> _logical_
 
+  - `extractFileText` reads text file to `str` (need [Text Analytics Toolbox](https://www.mathworks.com/help/textanalytics/index.html?s_tid=CRUX_lftnav))
 
+  ```matlab
+  sonnets = extractFileText("sonnets.txt");
+  % Split the file as there are two newline characters after each sonnet
+  sonnetsChunks = split(sonnets,[newline newline]);
 
+  % The Roman numerals used to number the sonnets are individual elements in
+  % the array - remove them by specifying a minimum length
+  sonnetChunkLengths = strlength(sonnetsChunks);
+  sonnets = sonnetsChunks(sonnetChunkLengths >= 300);
+  ```
+
+  - Counting the occurrences of words
+
+    ```matlab
+    deathCounts = count(sonnets, ["death", "kill", "die", "dead"]);
+    sonnetsWithDeath = nnz(deathCounts)
+    totalDeath = sum(deathCounts)
+    [maxDeath, deathSonnet] = max(deathCounts)
+    sonnets(deathSonnet)
+    ```
 
 <a name="ch3"></a>
 ## 3 Clean Data
