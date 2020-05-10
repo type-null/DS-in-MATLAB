@@ -3,7 +3,7 @@
 | __Table of Contents__
 | ----------------------
 | 1. [Survey Data](#ch1)<br>- [Flights Dataset](#ch1.1)<br>- [Shape of Distribution](#ch1.2)<br>- [Visualizing Multi-Dimensional Data](#ch1.3)
-| 2. [Organize Data](#ch2)<br>- [Strings](#ch2.1)
+| 2. [Organize Data](#ch2)<br>- [Strings](#ch2.1)<br>- [Dates and Times](#ch2.2)
 | 3. [Clean Data](#ch3)
 | 4. [Find Features](#ch4)
 | 5. [Domain Specific Feature Engineering](#ch5)
@@ -101,9 +101,7 @@ Like 2-D histograms, but visualized using box color instead of bar height.
 <a name="ch2.1"></a>
 ### Strings
 
-- Edit Text
-
-  1. Structured text
+1. Structured text
 
   - erase(_textVariable_, _textToErase_)
   
@@ -112,7 +110,7 @@ Like 2-D histograms, but visualized using box color instead of bar height.
   damage = double(damageTxt)
   ```
 
-  2. Unstructured text
+2. Unstructured text
 
   - `contains()` -> _logical_
 
@@ -131,13 +129,29 @@ Like 2-D histograms, but visualized using box color instead of bar height.
 
   - Counting the occurrences of words
 
-    ```matlab
-    deathCounts = count(sonnets, ["death", "kill", "die", "dead"]);
-    sonnetsWithDeath = nnz(deathCounts)
-    totalDeath = sum(deathCounts)
-    [maxDeath, deathSonnet] = max(deathCounts)
-    sonnets(deathSonnet)
-    ```
+  ```matlab
+  deathCounts = count(sonnets, ["death", "kill", "die", "dead"]);
+  sonnetsWithDeath = nnz(deathCounts)
+  totalDeath = sum(deathCounts)
+  [maxDeath, deathSonnet] = max(deathCounts)
+  sonnets(deathSonnet)
+  ```
+
+<a name="ch2.2"></a>
+### Dates and Times
+
+- `datetime()` only takes variable of the same types (string/numeric ...)
+  ```matlab
+  datetime(date,"InputFormat","yyyy-MM-dd HH:mm","Format","yyyy-MM-dd HH:mm") % specify input and display format
+  ```
+  - Calculate time
+      - `duratoin(3,20,0)` >> 03:20:00 (3 hour 20 minute)
+      - `time = minutes(250)` >> 250 min
+      - `time.Format = hh:mm` >> 04:10
+
+```matlab
+doc dates and time
+```
 
 <a name="ch3"></a>
 ## 3 Clean Data
