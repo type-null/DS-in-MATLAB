@@ -2,7 +2,11 @@
 
 __Table of Contents__
 1. [Survey Data](#ch1)
+  - [Flights Dataset](#ch1.1)
+  - [Shape of Distribution](#ch1.2)
+  - [Visualizing Multi-Dimensional Data](#ch1.3)
 2. [Organize Data](#ch2)
+  - [Strings](#ch2.1)
 3. [Clean Data](#ch3)
 4. [Find Features](#ch4)
 5. [Domain Specific Feature Engineering](#ch5)
@@ -21,6 +25,7 @@ This will ensure the data files are always accessible every time you start MATLA
 <a name="ch1"></a>
 ## 1 Survey Data
 
+<a name="ch1.1"></a>
 ### Flights Dataset
 
 - 2015 data from the US Department of Transportation's Airline On-time Performance Data Set, specifically the [Bureau of Transportation Statistics](https://www.transtats.bts.gov/homepage.asp).
@@ -34,7 +39,7 @@ flights = importFlightsData("flightsJan.csv")
 
 ![variables relationship](https://i.imgur.com/ivz2qti.png)
 
-
+<a name="ch1.2"></a>
 ### Shape of Distribution
 
 - `mean()`, `std()`
@@ -62,6 +67,7 @@ sk = skewness(rmmissing(flights.DURATION_DIFF))
   boxplot(flights.DURATION_DIFF, flights.ORIGIN)
   ```
 
+<a name="ch1.3"></a>
 ### Visualizing Multi-Dimensional Data
 
 - 2-D histogram `histogram2()`
@@ -95,6 +101,7 @@ Like 2-D histograms, but visualized using box color instead of bar height.
 <a name="ch2"></a>
 ## 2 Organize Data
 
+<a name="ch2.1"></a>
 ### Strings
 
 - Edit Text
@@ -111,6 +118,9 @@ Like 2-D histograms, but visualized using box color instead of bar height.
   2. Unstructured text
 
   - `contains()` -> _logical_
+
+
+
 
 <a name="ch3"></a>
 ## 3 Clean Data
