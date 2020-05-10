@@ -25,6 +25,64 @@ flights = importFlightsData("flightsJan.csv")
 
 ![variables relationship](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/LA4Gfp92SkCOBn6fdspArg_aa226070cad5140f55bd2102b551dbdc_Flight-time-diagram.png?expiry=1589068800000&hmac=9-AH07HuRJBHHqx5lk9MRuZOqt19mvvRGx2QZC5C3JI)
 
+
+### Shape of Distribution
+
+- `mean()`, `std()`
+
+- __Skewness:__ Left skewed (< 0, most data above the mean, median close to Q3), Right skewed (> 0)
+
+```matlab
+sk = skewness(rmmissing(flights.DURATION_DIFF))
+```
+`sk = 1.8145`
+
+  - kurtosis(Normal dstn) = 3. kt increases as the tail becomes heavier (more outlier-prone but no direction).
+
+  ```matlab
+  kt = kurtosis(rmmissing(flights.DURATION_DIFF))
+  ```
+  `kt = 14.3533`
+
+- __Interquartile Range (IQR):__ Middle 50% of data = $$Q3 - Q1$$
+
+  - Box plot: to see skewness
+
+  ```matlab
+  % group boxplot
+  boxplot(flights.DURATION_DIFF, flights.ORIGIN)
+  ```
+
+### Visualizing Multi-Dimensional Data
+
+- 2-D histogram `histogram2()`
+
+- Multivariate Normal
+
+```matlab
+bins = 10 % # of bins
+binscatter(X(:,1),X(:,2),bins);
+```
+
+Like 2-D histograms, but visualized using box color instead of bar height.
+
+- `scatterhistogram()`
+
+  - Adding a group variable to scatter histogram to see the potential relationships
+
+- `heatmap()`
+
+  - Use `'ColorVariable'` to visualize group statistics from continuous variable calculated using `groupsummary()`.
+
+- High Dimensional Datasets
+
+  - Scatter plot matrix: `gplotmatrix()`
+
+  - Parallel coordinate plot: `parallelplot`
+
+    - Single plot with multiple-axes to show the path of observations
+
+
 ## 2 Organize Data
 
 ## 3 Clean Data
