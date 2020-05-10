@@ -109,6 +109,7 @@ Like 2-D histograms, but visualized using box color instead of bar height.
   damageTxt = replace(Damage, ["K", "M", "B"], ["e3", "e6", "e9"]);
   damage = double(damageTxt)
   ```
+  - `eraseBetween`, `insertBefore`, `extractAfter`, etc
 
 2. Unstructured text
 
@@ -197,6 +198,7 @@ doc dates and time
   ![Five combine methods](https://i.imgur.com/h1mlnYH.png)
 
 - Join Tables
+  - Use `Task` button
 
 <a name="ch2.4"></a>
 ### Rearrange Data
