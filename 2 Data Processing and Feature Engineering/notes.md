@@ -194,7 +194,7 @@ doc dates and time
       - Also `imageDatastore`, `spreadsheetDatastore`
 
 - 5 Combine Methods
-  ![Five combine methods](https://i.imgur.com/FlGfDW7.png)
+  ![Five combine methods](https://i.imgur.com/h1mlnYH.png)
 
 - Join Tables
 
@@ -203,7 +203,7 @@ doc dates and time
 
 - `sortrows` takes (_TABLE,SORT VARIABLE,ORDER_)
 
-- `topkrows` when there ties
+- `topkrows` when there are ties
   ```matlab
   % determine 20 least busy airport
   % use delay time as secondary sort variable
