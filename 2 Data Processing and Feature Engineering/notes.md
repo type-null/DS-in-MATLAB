@@ -4,7 +4,7 @@
 | ----------------------
 | 1. [Survey Data](#ch1)<br>- [Flights Dataset](#ch1.1)<br>- [Shape of Distribution](#ch1.2)<br>- [Visualizing Multi-Dimensional Data](#ch1.3)
 | 2. [Organize Data](#ch2)<br>- [Strings](#ch2.1)<br>- [Dates and Times](#ch2.2)<br>- [Combine Data](#ch2.3)<br>- [Rearrange Data](#ch2.4)
-| 3. [Clean Data](#ch3)
+| 3. [Clean Data](#ch3)<br>- [Missing Data](#ch3.1)
 | 4. [Find Features](#ch4)
 | 5. [Domain Specific Feature Engineering](#ch5)
 
@@ -219,6 +219,27 @@ doc dates and time
 
 <a name="ch3"></a>
 ## 3 Clean Data
+
+<a name="ch3.1"></a>
+### Missing Data
+- Types: MAR (relate to other variable), MACR, MNAR (strong bias)
+
+- `ismissing()`
+    - Identify missing value
+    ![missing type](https://i.imgur.com/A25chjZ.png)
+
+- `standardizeMissing()` to change abnormal data to missing taking (A,_indicator_,"DataVariables",_vars_)
+
+- Handle missing data
+    - Domain knowledge
+    - Use `'omitnan'` option to include only numeric values
+    - MAR, MCAR -> Remove `rmmissing`
+    - MNAR -> Replace -> `fillmissing(A,method)`
+    - Task `Clean Missing Data` button in live script
+
+
+<a name="ch3.1"></a>
+### Missing Data
 
 
 
