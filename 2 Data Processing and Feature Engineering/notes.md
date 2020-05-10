@@ -3,7 +3,7 @@
 | __Table of Contents__
 | ----------------------
 | 1. [Survey Data](#ch1)<br>- [Flights Dataset](#ch1.1)<br>- [Shape of Distribution](#ch1.2)<br>- [Visualizing Multi-Dimensional Data](#ch1.3)
-| 2. [Organize Data](#ch2)<br>- [Strings](#ch2.1)<br>- [Dates and Times](#ch2.2)
+| 2. [Organize Data](#ch2)<br>- [Strings](#ch2.1)<br>- [Dates and Times](#ch2.2)<br>- [Combine Data](#ch2.3)<br>- [Rearrange Data](#ch2.4)
 | 3. [Clean Data](#ch3)
 | 4. [Find Features](#ch4)
 | 5. [Domain Specific Feature Engineering](#ch5)
@@ -175,6 +175,45 @@ Like 2-D histograms, but visualized using box color instead of bar height.
 ```matlab
 doc dates and time
 ```
+
+
+<a name="ch2.3"></a>
+### Combine Data
+
+- Import __multiple__ data files using `datastore`
+  ```matlab
+  flightsDatastore = datastore("flights*.csv") % use '*' to match any strings
+  flightsAll = readall(flightsDatastore)
+  ```
+    - To specify import function
+      ```matlab
+      % use 'UniformRead' to import as one table
+      flightsDatastore = fileDatastore("flights*.csv","ReadFcn",@importFlightsData,"UniformRead",true)
+      flightsAll = readall(flightsDatastore)
+      ```
+      - Also `imageDatastore`, `spreadsheetDatastore`
+
+- 5 Combine Methods
+  ![Five combine methods](https://i.imgur.com/FlGfDW7.png)
+
+- Join Tables
+
+<a name="ch2.4"></a>
+### Rearrange Data
+
+- `sortrows` takes (_TABLE,SORT VARIABLE,ORDER_)
+
+- `topkrows` when there ties
+  ```matlab
+  % determine 20 least busy airport
+  % use delay time as secondary sort variable
+  flights.delayed = flights.departure_delay > 15
+  delays = groupsummary(flights,"origin","sum","delayed")
+  bottom20 = topkrows(delays,20,["GroupCount","sum_delayed"],["ascend","descend"])
+  % use innerjoin to get more info
+  bottom20 = innerjoin(flights,bottom20)
+  ```
+
 
 <a name="ch3"></a>
 ## 3 Clean Data
