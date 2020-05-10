@@ -1,15 +1,16 @@
 # Data Processing and Feature Engineering
 
-__Table of Contents__
-1. [Survey Data](#ch1)
-    - [Flights Dataset](#ch1.1)
-    - [Shape of Distribution](#ch1.2)
-    - [Visualizing Multi-Dimensional Data](#ch1.3)
-2. [Organize Data](#ch2)
-    - [Strings](#ch2.1)
-3. [Clean Data](#ch3)
-4. [Find Features](#ch4)
-5. [Domain Specific Feature Engineering](#ch5)
+| __Table of Contents__
+| ----------------------
+| 1. [Survey Data](#ch1)
+|     - [Flights Dataset](#ch1.1)
+|     - [Shape of Distribution](#ch1.2)
+|     - [Visualizing Multi-Dimensional Data](#ch1.3)
+| 2. [Organize Data](#ch2)
+|     - [Strings](#ch2.1)
+| 3. [Clean Data](#ch3)
+| 4. [Find Features](#ch4)
+| 5. [Domain Specific Feature Engineering](#ch5)
 
 
 Before you start, download [the code files and readings](https://www.mathworks.com/supportfiles/practicaldsmatlab/flights/Data%20Processing%20and%20Feature%20Engineering.zip) and [data files](https://www.mathworks.com/supportfiles/practicaldsmatlab/flights/Flights.zip).
