@@ -23,7 +23,7 @@ flights = importFlightsData("flightsJan.csv")
 
 - The departure time is in the time zone for the origin airport, whereas the arrival time is in the time zone for the destination airport.
 
-![variables relationship](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/LA4Gfp92SkCOBn6fdspArg_aa226070cad5140f55bd2102b551dbdc_Flight-time-diagram.png?expiry=1589068800000&hmac=9-AH07HuRJBHHqx5lk9MRuZOqt19mvvRGx2QZC5C3JI)
+![variables relationship](https://i.imgur.com/ivz2qti.png)
 
 
 ### Shape of Distribution
@@ -78,12 +78,29 @@ Like 2-D histograms, but visualized using box color instead of bar height.
 
   - Scatter plot matrix: `gplotmatrix()`
 
-  - Parallel coordinate plot: `parallelplot`
+  - Parallel coordinate plot: `parallelplot()`
 
     - Single plot with multiple-axes to show the path of observations
 
 
 ## 2 Organize Data
+
+### Strings
+
+- Edit Text
+
+  1. Structured text
+
+  - erase(_textVariable_, _textToErase_)
+  
+  - ```matlab
+  damageTxt = replace(Damage, ["K", "M", "B"], ["e3", "e6", "e9"]);
+  damage = double(damageTxt)
+  ```
+
+  2. Unstructured text
+
+  - `contains()` -> _logical_
 
 ## 3 Clean Data
 
