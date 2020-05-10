@@ -103,7 +103,7 @@ Like 2-D histograms, but visualized using box color instead of bar height.
 
   - erase(_textVariable_, _textToErase_)
   
-  - ```matlab
+  ```matlab
   damageTxt = replace(Damage, ["K", "M", "B"], ["e3", "e6", "e9"]);
   damage = double(damageTxt)
   ```
