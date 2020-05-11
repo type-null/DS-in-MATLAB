@@ -5,7 +5,7 @@
 | 1. [Survey Data](#ch1)<br>- [Flights Dataset](#ch1.1)<br>- [Shape of Distribution](#ch1.2)<br>- [Visualizing Multi-Dimensional Data](#ch1.3)
 | 2. [Organize Data](#ch2)<br>- [Strings](#ch2.1)<br>- [Dates and Times](#ch2.2)<br>- [Combine Data](#ch2.3)<br>- [Rearrange Data](#ch2.4)
 | 3. [Clean Data](#ch3)<br>- [Missing Data](#ch3.1)<br>- [Outliers](#ch3.2)<br>- [Normalize Data](#ch3.3)
-| 4. [Find Features](#ch4)
+| 4. [Find Features](#ch4)<br>- [Feature Engineering](#ch4.1)<br>- [Unsupervised Learning](#ch4.2)<br>- [Feature Selection](#ch4.3)
 | 5. [Domain Specific Feature Engineering](#ch5)
 
 
@@ -173,6 +173,8 @@ Like 2-D histograms, but visualized using box color instead of bar height.
     d = 0:seconds(30):minutes(3)
     ```
 
+- `dateshift()` shifts time to start or end of a time unit -> good for groupsummary
+
 ```matlab
 doc dates and time
 ```
@@ -246,6 +248,7 @@ doc dates and time
     - Median Absolute Deviation (med±3cMAD)
       - MAD = median(|x - median(x)|)
     - Moving Mean or Median -> transient spikes
+      - Moving _median_ is more robust than _mean_
 
 - `isoutlier`, `rmoutlier`
 
@@ -294,11 +297,42 @@ doc dates and time
 | Non-normal dstn | robust zscore: use MAD instead of std to scale the data | `normalize(A,"zscore","robust")` |
 
 
-
+- Smoothing Data
+  - Only used for indexed data (by time, etc)
+  - Methods: moving average, local regression, robust methods, advanced types of regression
+  - `Smoothing data` live editor task button 
+  ![smoothing data task](https://i.imgur.com/lQhv5kR.png)
 
 
 <a name="ch4"></a>
 ## 4 Find Features that Matter
+<a name="ch4.1"></a>
+### Feature Engineering
+
+
+
+
+
+
+
+<a name="ch4.2"></a>
+### Unsupervised Learning
+
+
+
+
+
+
+
+
+
+<a name="ch4.3"></a>
+### Feature Selection
+
+
+
+
+
 
 
 
