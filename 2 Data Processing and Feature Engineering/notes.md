@@ -308,22 +308,111 @@ doc dates and time
 ## 4 Find Features that Matter
 <a name="ch4.1"></a>
 ### Feature Engineering
+- Feature generation approaches:
+  1. Transforming variables -> Apply equations
+    - BMI
+    - Use the `azimuth` function to calculate this angle from the latitude and longitude data for the origin and destination airports
+      ```matlab
+      flights.AZIMUTH = azimuth(flights.LATITUDE_ORIGIN,flights.LONGITUDE_ORIGIN,...
+        flights.LATITUDE_DESTINATION,flights.LONGITUDE_DESTINATION);
+      % Take the sine of the Azimuthal angle. The function, sind, takes degrees as input.
+      flights.SIN_AZIMUTH = sind(flights.AZIMUTH);
+      ```
 
 
+  2. Discretization -> Split data into groups (ranges) using numeric value
+    - Age range -> life stage (child/adult/senior) -> heatmap
+    - datetimes -> day of month
+      ```matlab
+      flights.DAY_OF_MONTH = day(flights.SCHEDULED_DEPARTURE_TIME);
+      ```
+    - Discrete numbers
+      ```matlab
+      % While flights that are > 15 minutes late are counted as "Delayed"
+      flights.DELAYED = discretize(flights.ARRIVAL_DELAY,[-inf,15,inf],"categorical",["On Time", "Delayed"]);
+      ```
 
 
+  3. Summarizing groups
+    - Mean `Weight` on each age category -> join the origin table
+
+
+- Qualitative tests for useful features
+  - Have variance
+  - Are not random
+  - Are unique
+  - Make sense -> domain knowledge
 
 
 
 <a name="ch4.2"></a>
 ### Unsupervised Learning
+Identifying patterns or groupings in your data.
+
+- Clustering Algorithms
+    ![Clustering Algorithms](https://i.imgur.com/LIRkPga.png)
+    1. k-means
+    - algorithm starts with k random points as centroids to decide remaining points most similar to which groups -> update centroid location -> update groups -> until distance between all points and their centroids reaches minimum
+    ```matlab
+    [idx,C] = kmeans([X Y], 2, "Replicates", 5); % k=2
+    ```
+    - use `"Replicates"` to use multiple starting points
+    - `"Distance"` option: 
+      ```matlab
+      'sqeuclidean'  - Squared Euclidean distance (the default).
+      'cityblock'    - Sum of absolute differences, a.k.a. L1 distance
+      'cosine'       - One minus the cosine of the included angle
+                       between points (treated as vectors).
+      'correlation'  - One minus the sample correlation between points
+                       (treated as sequences of values).
+      'hamming'      - Percentage of bits that differ (only suitable
+                       for binary data). 
+      ```
 
 
+    2. k-medoids (_median_)
+    - `kmedoids()`
 
 
+    3. spectral clustering
+    - Groups wrap around each other
+    - Know # of clusters: `idx = spectralcluster(X,3)`
+    - Not Know: `dbscan(X, 1, 5)`
+        - 1 (_Epsilon_): radius
+        - 5 (_MINPTS_): minimum number of points
+        - useful for high-dimensional data
+        - identify outliers:
+            - __Core__: points having at least _MINPTS_ within _Epsilon_
+            - __Border__: not enough _MINPTS_ within _Epsilon_ but within other __core__'s _Epsilon_
+            - __Noise__: other -> outliers
+           
 
+    4. gaussian mixture models
+    - Overlapping distribution
+    - First determine k clusters
+    ```matlab
+    % k = 2
+    GMModel = fitgmdist([x y],2);
+    idx = cluster(GMModel,[x y]);
+    gscatter(x,y,idx)
+    ```
 
+- Evaluate clusters 
+  1. Silhouette Plot
+    ```matlab
+    [silh5,h] = silhouette(X,idx5,"sqEuclidean");
+    ```
+    - Points that are well matched to their cluster and poorly matched to other clusters have a value of 1.
+    - In general, larger silhouette values mean better cluster quality.
+    ```matlab
+    s5 = mean(silh5)
+    ```
 
+  2. `evalclusters` (automately determine k)
+    ```matlab
+    clustev = evalclusters(X,"kmeans","silhouette","KList",2:6)
+    ```
+    - Optimal # of clusters stored in `k = clustev.OptimalK`
 
 
 <a name="ch4.3"></a>
