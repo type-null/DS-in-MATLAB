@@ -418,10 +418,56 @@ Identifying patterns or groupings in your data.
 <a name="ch4.3"></a>
 ### Feature Selection
 
+1. Wrapper
+    train -> eval -> select features
+    __output__: Best features, best model
+
+2. Embedded
+    selection as part of training
+    __output__: trained model that emphasize useful features
+
+Wrapper and Embedded rely on model performance to guide feature selection. ([Next course](../3%20Predictive%20Modeling%20and%20Machine%20Learning))
+
+3. Filter
+    select before train
+    1. Variance Thresholding
+    _Goal:_ eliminate low-variance features
+    scale features -> compute var -> select threshold `t` -> select features `var>t`
+    - Elbow
+    - for continuous variable
+    - convert scaled variance to proportion 
+        - to see what proportion of variance you lose by discarding a given feature
+    - Principle Component Analysis can be used to create a new feature set where variance is concentrated in a small subset of features, making variance thresholding more straightforward to apply.
+
+    2. Covariance and Correlation
+    _Goal:_ eliminate cov=0
+    - standardized corr: Pearson Correlation Coefficient
+    - Spearman and Kendall corr are better for non-linear data
+        - Spearman is also robust to
+            1. outliers
+            2. non-normal
+            3. heteroscedastic
+            4. discrete ordinal (ratings)
+        - Kendall is preferable to Spearman (and Pearson) in situations where the dataset is small and/or there are likely to be many ties in rank due to identical data values.
+    - Monotonic only
+    - Generally, |corr| is divided into 3 level by [0.4 0.7]
+    - For weak correlation values, or small datasets, it may also be desirable to obtain a measure of confidence that a correlation value is significantly different than 0.
+    ```matlab
+    [c,p]= corr(tbl.Weight,tbl.Acceleration) 
+    ```
+    - heatmap
+    ```matlab
+    type = "Pearson";
+    C = corr(ordinalX,'type',type);
+    C(C==1) = nan;
+    heatmap(ordinalvars,ordinalvars,C,'ColorLimits',[-1 1],'Title',type+" Correlation");
+    ```
+
+    3. Statistical Tests
+    choose test -> choose probability threshold (α) -> compute _p_-value
 
 
-
-
+[Apply Filter Methods](Module%204/ApplyingFilterMethods.mlx)
 
 
 
