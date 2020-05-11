@@ -4,7 +4,7 @@
 | ----------------------
 | 1. [Survey Data](#ch1)<br>- [Flights Dataset](#ch1.1)<br>- [Shape of Distribution](#ch1.2)<br>- [Visualizing Multi-Dimensional Data](#ch1.3)
 | 2. [Organize Data](#ch2)<br>- [Strings](#ch2.1)<br>- [Dates and Times](#ch2.2)<br>- [Combine Data](#ch2.3)<br>- [Rearrange Data](#ch2.4)
-| 3. [Clean Data](#ch3)<br>- [Missing Data](#ch3.1)
+| 3. [Clean Data](#ch3)<br>- [Missing Data](#ch3.1)<br>- [Outliers](#ch3.2)<br>- [Normalize Data](#ch3.3)
 | 4. [Find Features](#ch4)
 | 5. [Domain Specific Feature Engineering](#ch5)
 
@@ -234,12 +234,66 @@ doc dates and time
     - Domain knowledge
     - Use `'omitnan'` option to include only numeric values
     - MAR, MCAR -> Remove `rmmissing`
-    - MNAR -> Replace -> `fillmissing(A,method)`
+    - MNAR -> Replace `fillmissing(A,method)`
     - Task `Clean Missing Data` button in live script
 
 
-<a name="ch3.1"></a>
-### Missing Data
+<a name="ch3.2"></a>
+### Outliers
+- Popular outlier limits
+    - 3 std (μ±3σ) -> Normal dstn
+    - 1.5 IQR (Q1-1.5IQR, Q3+1.5IQR)
+    - Median Absolute Deviation (med±3cMAD)
+      - MAD = median(|x - median(x)|)
+    - Moving Mean or Median -> transient spikes
+
+- `isoutlier`, `rmoutlier`
+
+- __Streamline:__
+    - `histogram` to see distribution
+    - `trimmed = rmoutliers(A,method)` then `histogram(trimmed)`, _method_ can be `mean`, `quartiles`, `median`
+    - Adjust amout removed using `'ThresholdFactor'` (takes a double)
+    - Gain flexibility with extremely skewed data using `"percentiles"` (takes [ lowPercent , highPercent ])
+    ```matlab
+    lowPercent = 5; 
+    highPercent = 95; 
+
+    % use the above choices with the percentile outlier classification method
+    [~,pLow,pHigh,~] = isoutlier(flights.DEPARTURE_DELAY,...
+    "percentiles",[ lowPercent , highPercent ]);  
+
+
+    histogram(flights.DEPARTURE_DELAY);  
+    xlabel("Delay (minutes)"); 
+    xline(pLow,"m"); xline(pHigh,"m"); 
+
+    xlim([pLow - 20 , pHigh + 20]) % optional zooom in to better see bounds 
+    ```
+
+- `movmean` and `movmedian` methods require __one__ data point at each index
+    - We can calculate summary statistics at each index
+    ```matlab
+    velStats = groupsummary(flights,"DISTANCE",["max","min","mean","median"],"AVE_VELOCITY");
+
+    % Find outliers
+    moveMethod = "movmean"; 
+    windowLength = 500; 
+    tFactor = 4; 
+
+    [outlierIdx,thresholdLow,thresholdHigh] =  isoutlier(velStats.max_AVE_VELOCITY, ...
+        moveMethod,windowLength,"ThresholdFactor",tFactor,"SamplePoints",velStats.DISTANCE);
+    ```
+    ![output plot](https://i.imgur.com/h4RugpX.png)
+
+<a name="ch3.3"></a>
+### Normalize Data
+- Uniform dstn -> scale data between 0 and 1
+
+- Normal dstn -> z-score (z = (x-μ)/σ) -> `normalize()` default method is 'zscore'
+
+-
+
+
 
 
 
