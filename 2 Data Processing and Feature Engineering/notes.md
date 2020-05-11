@@ -418,6 +418,8 @@ Identifying patterns or groupings in your data.
 <a name="ch4.3"></a>
 ### Feature Selection
 
+#### Evaluating Features
+
 1. Wrapper
     train -> eval -> select features
     __output__: Best features, best model
@@ -463,12 +465,48 @@ Wrapper and Embedded rely on model performance to guide feature selection. ([Nex
     heatmap(ordinalvars,ordinalvars,C,'ColorLimits',[-1 1],'Title',type+" Correlation");
     ```
 
+    - For non-ordinal discrete variables, it is possible to use Spearman or Kendall correlation by converting each categorical variable into two or more logical features - one new feature for each category - then computing the correlation between each new feature and the response. "[one hot encoding](https://en.wikipedia.org/wiki/One-hot)"
+    ```matlab
+    [c,p]= corr(tbl.Mfg == "saab",tbl.Weight,'type','Kendall')
+    ```
+
+
     3. Statistical Tests
     choose test -> choose probability threshold (α) -> compute _p_-value
 
 
 [Apply Filter Methods](Module%204/ApplyingFilterMethods.mlx)
+- Variance Thresholding for Continuous Features
+- Evaluating Continuous Predictor-Response Pairs
+  - corr
+- Evaluating discrete predictor-response pairs
+  - contingency table (cross-tablation): `crosstab` to see how 2 variable codistributed
+  - actual and expected counts
+  - chi-squared test
+- Evaluating continuous-discrete feature pairs
+  - boxplot
+  - The F-statistic 
+  - ANOVA
 
+
+#### Dimensionality Reduction and PCA
+Cost of feature reduction: __Projection error__
+ - -> reduce projection error by introducing new axes (Principle component axes)
+   - min projection error
+   - max variance
+   - -> new feature _P_
+   - __Principle component scores__: distance from origin to projection
+
+- PCA steps:
+  1. Scale and mean-center the original features
+  2. Compute the components, scores and variances
+      ```matlab
+      [P,S,V] = pca(X)
+      ```
+  3. Apply variance threshold
+  4. Scores of the retained components become the new feature set
+
+[Apply PCA](Module%204/ApplyingPCA.mlx)
 
 
 <a name="ch5"></a>
