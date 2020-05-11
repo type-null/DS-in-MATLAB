@@ -287,9 +287,11 @@ doc dates and time
 
 <a name="ch3.3"></a>
 ### Normalize Data
-| Uniform dstn | scale data between 0 and 1 | `normalize(A,'range')` 
-| Normal dstn | z-score (z = (x-μ)/σ) | `normalize(A)` default method is 'zscore'
-| Non-normal dstn | robust zscore: use MAD instead of std to scale the data | `normalize(A,"zscore","robust")` 
+| Distribution | Normalize Method | Code|
+| --- | --- | --- |
+| Uniform dstn | scale data between 0 and 1 | `normalize(A,'range')` |
+| Normal dstn | z-score (z = (x-μ)/σ) | `normalize(A)` default method is 'zscore' |
+| Non-normal dstn | robust zscore: use MAD instead of std to scale the data | `normalize(A,"zscore","robust")` |
 
 
 
