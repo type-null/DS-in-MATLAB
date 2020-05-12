@@ -534,7 +534,7 @@ Cost of feature reduction: __Projection error__
     - Foundamental frequency (1st)
     - Harmonics (rest)
     - spectral summary statistics
-    ![statistics](https://i.imgur.com/1GemqvD.png)
+    ![statistics](https://i.imgur.com/qaex9Zn.png)
     - spectrum plot
     ```matlab
     % Plot the periodogram. The empty inputs [] specify that the default values should be used.
@@ -643,6 +643,20 @@ __Evaluate Features__ ([this file](module%205/Images/clusteringImages.mlx))
   loveContext = context(tokenizedSonnets,"love");
   disp(loveContext.Context)
   ```
+
+- Cleaning words
+  ```matlab
+  tokenizedSonnets = erasePunctuation(tokenizedSonnets); 
+  tokenizedSonnets = removeStopWords(tokenizedSonnets); 
+  tokenizedSonnets = lower(tokenizedSonnets); 
+  ```
+  - Reduce words to their root form using `normalizeWords`
+  ```matlab
+  tokenizedSonnets = addPartOfSpeechDetails(tokenizedSonnets);
+  tokenizedSonnets = normalizeWords(tokenizedSonnets,'Style','lemma');
+  ```
+
+
 [Modeling Using Qualitative Description](module%205/Text/ExampleOfFeatureEngineeringUsingTextDescriptions.mlx)
 
 
