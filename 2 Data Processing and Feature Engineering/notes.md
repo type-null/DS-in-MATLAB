@@ -6,7 +6,7 @@
 | 2. [Organize Data](#ch2)<br>- [Strings](#ch2.1)<br>- [Dates and Times](#ch2.2)<br>- [Combine Data](#ch2.3)<br>- [Rearrange Data](#ch2.4)
 | 3. [Clean Data](#ch3)<br>- [Missing Data](#ch3.1)<br>- [Outliers](#ch3.2)<br>- [Normalize Data](#ch3.3)
 | 4. [Find Features](#ch4)<br>- [Feature Engineering](#ch4.1)<br>- [Unsupervised Learning](#ch4.2)<br>- [Feature Selection](#ch4.3)
-| 5. [Domain Specific Feature Engineering](#ch5)
+| 5. [Domain Specific Feature Engineering](#ch5)<br>- [Process Signals](#ch5.1)<br>- [Process Images](#ch5.2)<br>- [Process Text](#ch5.3)
 
 
 Before you start, download [the code files and readings](https://www.mathworks.com/supportfiles/practicaldsmatlab/flights/Data%20Processing%20and%20Feature%20Engineering.zip) and [data files](https://www.mathworks.com/supportfiles/practicaldsmatlab/flights/Flights.zip).
@@ -511,5 +511,139 @@ Cost of feature reduction: __Projection error__
 
 <a name="ch5"></a>
 ## 5 Domain Specific Feature Engineering
+<a name="ch5.1"></a>
+### Processing Signals
+
+#### Synchronizing Data with Timetables
+- Use `'TimeStep'` to build timetable
+- Interpolation: `retime()` specifies interpolation method and new time step (sample rate)
+  - then `join` tables
+  - or you can combine these two steps using `synchronize()`
+
+#### Summary Statistics as Features
+- Windowing
+  ```matlab
+  windowLength = 2.5;
+  summaryStat = "mean"; % min, max
+  summaryStandWalk = retime(StandWalk,"regular",summaryStat,"TimeStep",seconds(windowLength));
+  ```
+  -  Standard deviation is not one of the default options for retime, but you can refer to any function with an "@" symbol. So instead of a string like "std", you write `@std` (without quotation marks). 
+
+- Fourier Transform
+  - Indexed by time -> indexed by frequency
+    - Foundamental frequency (1st)
+    - Harmonics (rest)
+    - spectral summary statistics
+    ![statistics](https://i.imgur.com/1GemqvD.png)
+    - spectrum plot
+    ```matlab
+    % Plot the periodogram. The empty inputs [] specify that the default values should be used.
+    periodogram(walkSignal,[],[],sampleRate);
+    ```
+
+[Practice using summary statistics as features.](Module%204/Signals/SummaryStatisticsAsFeatures.mlx)
+
+
+#### Finding Peaks
+- load audio
+    ```matlab
+    [maleData,maleSampleRate] = audioread("speech.wav");
+    maleSpeech = timetable(maleData,'SampleRate',maleSampleRate,'VariableNames','Data')
+    ```
+- play audio
+    ```matlab
+    sound(maleData,maleSampleRate)
+    ```
+
+- identify frequencies find location of peaks in the spectrum
+    - live editor task `Find Local Extrema`
+
+<a name="ch5.2"></a>
+### Processing Images
+![process](https://i.imgur.com/do40Xpn.png)
+__Preprocessing__ Sefment Images
+- APPS > `Image Segmenter`
+  1. load image
+  2. Adjust image? -> 'yes'
+  3. _CREATE MASK_ Threshold
+      - Global Threshold -> Adaptive Threshold: compensate for uneven lumination
+      - adjust Sensitivity
+      - Show Binary
+      - Create Mask
+  4. _REFINE MASK_ Fill holes, Clear borders
+  5. _REFINE MASK_ Morphology
+      - Select operation: Open Mask
+      - increase Radius
+  6. Generate Function, save to workspace
+
+- APPS > `Image Batch Processer`
+  1. load images -> select function -> Process all
+
+__Feature Engineering__ Get region properties: area, diameter
+- APPS > `Image Region Analyzer`
+  1. Choose Properties
+  2. Filter (__Cleaning Features__)
+  3. Export function
+
+__Evaluate Features__ ([this file](module%205/Images/clusteringImages.mlx))
+  1. Apply generated functions to all images
+  2. Create table of results
+  3. Perform `anova1` test
+  4. Cluster observations
+
+[Practice](module%205/Images/Practice%20with%20Images/PracticeWithImages.mlx)
+- load image
+  ```matlab
+  stop = imread(filename);
+  ```
+
+<a name="ch5.3"></a>
+### Processing Text
+- Extract text from website
+  ```matlab
+  url = "https://www.mathworks.com/help/textanalytics";
+  code = webread(url);
+  str = extractHTMLText(code)
+  ```
+- Word count
+  ```matlab
+  tokenizedSonnets = tokenizedDocument(sonnets);
+
+  figure;
+  wordcloud(tokenizedSonnets);
+  ```
+- Quantify wordcount
+  - Create matrix of counts `bagOfWords`
+  ```matlab
+  wordBagSonnets = bagOfWords(tokenizedSonnets)
+  full( wordBagSonnets.Counts )
+
+  % visualize
+  figure;
+  spy(wordBagSonnets.Counts)
+  axis normal
+  xlabel('Unique Word #')
+  ylabel('Sonnet')
+  
+  % or
+  clf;
+  plot(sum(wordBagSonnets.Counts))
+  xlabel('Unique Word #')
+  ylabel('Total Appearances')
+
+  % top k words
+  top10words = topkwords(wordBagSonnets,10)
+
+  % word frequency
+  clf;
+  wordPos = wordBagSonnets.Vocabulary == "love";
+  bar(wordBagSonnets.Counts(:,wordPos))
+
+  % word appearance
+  loveContext = context(tokenizedSonnets,"love");
+  disp(loveContext.Context)
+  ```
+[Modeling Using Qualitative Description](module%205/Text/ExampleOfFeatureEngineeringUsingTextDescriptions.mlx)
+
 
 
