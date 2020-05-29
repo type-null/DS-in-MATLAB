@@ -34,7 +34,9 @@ flights = importFlightsData("flightsJan.csv")
 
 - The departure time is in the time zone for the origin airport, whereas the arrival time is in the time zone for the destination airport.
 
-![variables relationship](https://i.imgur.com/ivz2qti.png)
+<p align="center">
+ <img src="https://i.imgur.com/ivz2qti.png" alt="variables relationship" width=500/>
+</p>
 
 <a name="ch1.2"></a>
 ### Shape of Distribution
