@@ -199,7 +199,9 @@ doc dates and time
       - Also `imageDatastore`, `spreadsheetDatastore`
 
 - 5 Combine Methods
-  ![Five combine methods](https://i.imgur.com/h1mlnYH.png)
+<p align="center">
+  <img src="https://i.imgur.com/h1mlnYH.png" width="700" alt="Five combine methods"/>
+</p>
 
 - Join Tables
   - Use `Task` button
@@ -230,7 +232,9 @@ doc dates and time
 
 - `ismissing()`
     - Identify missing value
-    ![missing type](https://i.imgur.com/A25chjZ.png)
+    <p align="center">
+      <img src="https://i.imgur.com/A25chjZ.png" width="450" alt="missing type"/>
+    </p>
 
 - `standardizeMissing()` to change abnormal data to missing taking (A,_indicator_,"DataVariables",_vars_)
 
@@ -288,7 +292,9 @@ doc dates and time
     [outlierIdx,thresholdLow,thresholdHigh] =  isoutlier(velStats.max_AVE_VELOCITY, ...
         moveMethod,windowLength,"ThresholdFactor",tFactor,"SamplePoints",velStats.DISTANCE);
     ```
-    ![output plot](https://i.imgur.com/h4RugpX.png)
+    <p align="center">
+      <img src="https://i.imgur.com/h4RugpX.png" width="400" alt="output plot"/>
+    </p>
 
 <a name="ch3.3"></a>
 ### Normalize Data
